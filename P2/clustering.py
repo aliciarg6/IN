@@ -1,5 +1,10 @@
-# Alberto Armijo Ruiz.
-# 4º GII.
+'''
+@author: Alberto Armijo Ruiz.
+@description:
+    Práctica 2 Inteligencia de Negocio.
+    Algoritmos de clustering.
+    4º GII
+'''
 
 """
 Algoritmos utilizados en el estudio.
@@ -19,12 +24,10 @@ from sklearn import metrics, preprocessing
 from math import floor
 import seaborn as sns
 import time
-from scipy.cluster.hierarchy import dendrogram,linkage
+from scipy.cluster.hierarchy import dendrogram,ward
 import numpy as np
 
 sys.setrecursionlimit(1500)
-
-t_global_start = time.time()
 
 def makeScatterPlot(data,outputName=None,displayOutput=True):
     sns.set()
@@ -34,12 +37,46 @@ def makeScatterPlot(data,outputName=None,displayOutput=True):
                             diag_kind="hist")  # en hue indicamos que la columna 'cluster' define los colores
     sns_plot.fig.subplots_adjust(wspace=.03, hspace=.03)
 
+
+    if displayOutput:
+        plt.show()
+
     if outputName != None:
         outputName += ".png"
         print(outputName)
-        sns_plot.savefig(outputName)
-    if displayOutput:
-        plt.show()
+        plt.savefig(outputName)
+        plt.clf()
+
+
+def transformToLatexTable(data,fileName,header=[]):
+    f = open(fileName,'w')
+
+    for col in header[0:len(header)-1]:
+        f.write(col+'&')
+
+    f.write(header[-1])
+    f.write('\\\\ \n')
+
+    for name, res in data.items():
+        f.write(name+'&')
+        keys = list(res.keys())
+        for item in keys[:len(keys)-1]:
+            if (type(res[item]) == int):
+                f.write('{:10}&'.format(res[item]))
+            else:
+                f.write('{:.2f}&'.format(res[item]))
+
+
+        if(type(res[keys[-1]])==int):
+            f.write('{:10}&'.format(res[keys[-1]]))
+        else:
+            f.write('{:.2f}'.format(res[keys[-1]]))
+
+
+        f.write("\\\\ \n")
+
+    f.close()
+
 
 def calculateMetrics(clusterPredict,data):
     metric_CH = metrics.calinski_harabaz_score(data, clusterPredict)
@@ -63,73 +100,97 @@ def createPrediction(dataframe,data,model):
 
     return [calculateMetrics(cluster_predict,data),X_dataFrame,time_finish,cluster_predict]
 
-def makeDendogram(data,predict,outputName=None, displayOutput=True):
-    vars = list(data)
-    vars.remove("cluster")
-    dataFrame = data[vars]
-    Z = linkage(dataFrame, 'ward')
-    plt.title("Dendograma")
-    dendrogram(Z, leaf_rotation=90., leaf_font_size=8., truncate_mode='lastp', p=12, show_contracted=True, labels=predict)
+def calculateMeanDictionary(cluster,cluster_col = 'cluster'):
+    vars = list(cluster)
+    vars.remove(cluster_col)
+    return dict(np.mean(cluster[vars],axis=0))
+
+def calculateDeviationDictionary(cluster, cluster_col = 'cluster'):
+    vars = list(cluster)
+    vars.remove(cluster_col)
+    return dict(np.std(cluster[vars],axis=0))
+
+def createMeanClusterDF(dataFrame, clusterCol = 'cluster'):
+    n_clusters = list(set(dataFrame[clusterCol]))
+
+    my_mean_df = pd.DataFrame()
+    my_deviation_df = pd.DataFrame()
+
+    for cluster_n in n_clusters:
+        my_cluster = dataFrame[dataFrame[clusterCol] == cluster_n]
+        meanDic = calculateMeanDictionary(cluster=my_cluster,cluster_col = clusterCol)
+        deviationDic = calculateDeviationDictionary(cluster=my_cluster, cluster_col = clusterCol)
+        stdDF = pd.DataFrame(deviationDic, index=[str(cluster_n)])
+        auxDF = pd.DataFrame(meanDic,index=[str(cluster_n)])
+        my_mean_df = pd.concat([my_mean_df,auxDF])
+        my_deviation_df = pd.concat([my_deviation_df,stdDF])
+
+    return [my_mean_df, my_deviation_df]
+
+def findIndex(iterable, value):
+    index = -1
+
+    for val in iterable:
+        if(value == val):
+            return index
+
+    return index
+
+def createNormalizedDF(dataFrame):
+    vars = list(dataFrame)
+    if(findIndex(vars,'cluster') != -1):
+        vars.remove('cluster')
+
+    norm = preprocessing.normalize(dataFrame,norm='l2')
+    df = pd.DataFrame(norm,columns=vars, index=dataFrame.index)
+
+    return df
+
+def createLatexDataFrame(data):
+    my_index = list(dict(data.items()).keys())
+    my_data = list(data.values())
+    my_cols = list(my_data[0].keys())
+    latexDF = pd.DataFrame()
+
+    for row in range(len(my_index)):
+        aux = pd.DataFrame(data=my_data[row],index=[my_index[row]],columns=my_cols)
+        latexDF = pd.concat([latexDF,aux])
+
+    return latexDF
+
+def makeHeatmap(data,displayOutput=True,outputName=None):
+    meanDF, stdDF = createMeanClusterDF(dataFrame=data)
+    meanDF = createNormalizedDF(dataFrame=meanDF)
+    hm = sns.heatmap(data=meanDF, linewidths=.1, cmap='Blues_r')
+
+    if displayOutput:
+        plt.show()
 
     if outputName != None:
-        outputName += "_dendogram.png"
+        outputName += '.png'
+        print(outputName)
         plt.savefig(outputName)
-    if displayOutput:
-        plt.show()
+        plt.clf()
 
-def makeHeatMap(data,clusters,outputName=None, displayOutput=True):
-    sns.set()
-    vars = list(data)
-    vars.remove('cluster')
-    table = data[vars].T
-    sum_row = {row:np.sum(table[row]) for row in table}
-    sum_df = pd.DataFrame(sum_row, index=["Suma"])
-    sum_df = sum_df.T
-    table = createDataFrame(dataframe=sum_df,prediction=clusters)
-    table = pd.pivot_table(table,index=table.index,columns="cluster",values="Suma",fill_value=0)
-    print(table)
-    heatmap = sns.heatmap(table.T,xticklabels="auto", yticklabels="auto")
-    plt.yticks(rotation=0)
-
-    # Guardamos el archivo con el nombre especificado + terminación en heatmap.
-    if outputName != None:
-        outputName += "_heatmap.png"
-        heatmap.savefig(outputName)
-    if displayOutput:
-        plt.show()
-
-def makeClusterMap(data,clusters,outputName=None,displayOutput=True):
-    sns.set()
-    vars = list(data)
-    vars.remove('cluster')
-    table = data[vars].T
-    sum_row = {row: np.sum(table[row]) for row in table}
-    sum_df = pd.DataFrame(sum_row, index=["Suma"])
-    sum_df = sum_df.T
-    table = createDataFrame(dataframe=sum_df, prediction=clusters)
-    table = pd.pivot_table(table, index=table.index, columns="cluster", values="Suma", fill_value=0)
-    print(table)
-    clustermap = sns.clustermap(table, xticklabels="auto", yticklabels="auto")
-    plt.yticks(rotation=0)
-
-    if(outputName != None):
-        outputName += "clustermap.png"
-        clustermap.savefig(outputName)
-
-    if displayOutput:
-        plt.show()
 
 accidentes = pd.read_csv('accidentes_2013.csv')
+
+#-----------------------------------------------------------------------------------------------------------------------
+# CASO DE USO 1.
+#-----------------------------------------------------------------------------------------------------------------------
+t_global_start = time.time()
+print("Caso de uso: accidentes dónde hay colisón entre vehículos")
+
 subset = accidentes[accidentes['TIPO_ACCIDENTE'].str.contains("Colisión de vehículos")]
 usadas = ['TOT_VICTIMAS', 'TOT_MUERTOS', 'TOT_HERIDOS_GRAVES', 'TOT_HERIDOS_LEVES', 'TOT_VEHICULOS_IMPLICADOS']
 X = subset[usadas]
-n = 500
+n = 20000
 
 X  = X.sample(n,random_state=123456)
 X_normal = preprocessing.normalize(X, norm='l2')
 
 k_means = KMeans(init='k-means++', n_clusters=4, n_init=5)
-aglo=AgglomerativeClustering(n_clusters=40,linkage="ward")
+aglo=AgglomerativeClustering(n_clusters=23,linkage="ward")
 bandwidth = estimate_bandwidth(X_normal, quantile=0.2, random_state=123456)
 meanshift = MeanShift(bandwidth=bandwidth,bin_seeding=True)
 birch=Birch(n_clusters=6,threshold=0.1)
@@ -144,35 +205,192 @@ clustering_algorithms = (
     ("SpectralC",spectral)
 )
 
-met, clusterFrame, timeAlg, cluster_predict = createPrediction(dataframe=X, data=X_normal, model=k_means)
-# makeScatterPlot(data=clusterFrame,displayOutput=True)
-# makeDendogram(data=clusterFrame,predict=cluster_predict, outputName="agglomerativeclustering")
-makeHeatMap(data=clusterFrame, clusters=cluster_predict)
-makeClusterMap(data=clusterFrame, clusters=cluster_predict)
 
 # Creamos los datos de salida, y mostramos las gráficas si queremos.
+outputData = dict()
+min_size = 5
+for algorithm_name,algorithm in clustering_algorithms:
+    results = dict()
+    met, clusterFrame, timeAlg,cluster_predict = createPrediction(dataframe=X, data=X_normal, model=algorithm)
+    n_clusters=len(set(cluster_predict))
 
-# outputData = dict()
-# for algorithm_name,algorithm in clustering_algorithms:
-#     results = dict()
-#     met, clusterFrame, timeAlg,cluster_predict = createPrediction(dataframe=X, data=X_normal, model=algorithm)
-#     n_clusters=len(set(cluster_predict))
-#     #makeScatterPlot(data=clusterFrame, outputName=algorithm_name, displayOutput=True)
-#
-#     results['n_clusters']=n_clusters
-#     results['sc_metric']=met[0]
-#     results['hc_metric']=met[1]
-#     results['time']=timeAlg
-#
-#     outputData[algorithm_name] = results
-#
-# print('\n{0:<15}\t{1:<10}\t{2:<10}\t{3:<10}\t{4:<10}'.format(
-#     'Name', 'N clusters', 'SC metric', 'HC metric', 'Time (s)'))
-#
-# for name, res in outputData.items():
-#     print('{0:<15}\t{1:<10}\t{2:<10.2f}\t{3:<10.2f}\t{4:<10.2f}'.format(
-#         name, res['n_clusters'], res['sc_metric'], res['hc_metric'],
-#         res['time']))
-#
-# print('\nTotal time = {0:.2f}'.format(time.time() - t_global_start))
+    if( n_clusters > 15 ):
+        X_filtrado = clusterFrame[clusterFrame.groupby('cluster').cluster.transform(len) > min_size]
+    else:
+        X_filtrado = clusterFrame
 
+    makeScatterPlot(data=X_filtrado,outputName="./imagenes/scatterMatrix_caso1_" +algorithm_name,
+                    displayOutput=False)
+
+    makeHeatmap(data=X_filtrado,outputName="./imagenes/heatmap_caso1_"+algorithm_name,
+                displayOutput=False)
+
+    results['N Clusters']=n_clusters
+    results['HC metric']=met[0]
+    results['SC metric']=met[1]
+    results['Time']=timeAlg
+
+    outputData[algorithm_name] = results
+
+latexCaso1 = createLatexDataFrame(data=outputData)
+
+f = open('caso1.txt','w')
+f.write(latexCaso1.to_latex())
+f.close()
+
+print('\n{0:<15}\t{1:<10}\t{2:<10}\t{3:<10}\t{4:<10}'.format(
+    'Name', 'N clusters', 'HC metric', 'SC metric', 'Time(s)'))
+
+for name, res in outputData.items():
+    print('{0:<15}\t{1:<10}\t{2:<10.2f}\t{3:<10.2f}\t{4:<10.2f}'.format(
+        name, res['N Clusters'], res['HC metric'], res['SC metric'],
+        res['Time']))
+
+print('\nTotal time = {0:.2f}'.format(time.time() - t_global_start))
+
+#-----------------------------------------------------------------------------------------------------------------------
+# CASO DE USO 2.
+#-----------------------------------------------------------------------------------------------------------------------
+t_global_start = time.time()
+print("Caso de uso: accidentes en Cataluña cada 30 días.")
+subset = accidentes[accidentes['COMUNIDAD_AUTONOMA'].str.contains("Cataluña")]
+usadas = ['TOT_MUERTOS30D','TOT_HERIDOS_GRAVES30D','TOT_HERIDOS_LEVES30D', 'TOT_VEHICULOS_IMPLICADOS']
+
+X = subset[usadas]
+n = 10000
+
+X  = X.sample(n,random_state=123456)
+X_normal = preprocessing.normalize(X, norm='l2')
+
+k_means = KMeans(init='k-means++', n_clusters=4, n_init=5)
+aglo=AgglomerativeClustering(n_clusters=45,linkage="ward")
+bandwidth = estimate_bandwidth(X_normal, quantile=0.2, random_state=123456)
+meanshift = MeanShift(bandwidth=bandwidth,bin_seeding=True)
+birch=Birch(n_clusters=6,threshold=0.1)
+spectral=SpectralClustering(n_clusters=4,eigen_solver="arpack")
+
+clustering_algorithms = (
+    ("K-medias",k_means),
+    ("AC",aglo),
+    ("Mean Shift",meanshift),
+    ("Birch",birch),
+    ("SpectralC",spectral)
+)
+
+
+# Creamos los datos de salida, y mostramos las gráficas si queremos.
+outputData = dict()
+for algorithm_name,algorithm in clustering_algorithms:
+    results = dict()
+    met, clusterFrame, timeAlg,cluster_predict = createPrediction(dataframe=X, data=X_normal, model=algorithm)
+    n_clusters=len(set(cluster_predict))
+
+    if (n_clusters > 15):
+        X_filtrado = clusterFrame[clusterFrame.groupby('cluster').cluster.transform(len) > min_size]
+    else:
+        X_filtrado = clusterFrame
+
+    makeScatterPlot(data=clusterFrame, outputName="./imagenes/scatterMatrix_caso2_" + algorithm_name,
+                    displayOutput=False)
+
+    makeHeatmap(data=X_filtrado, outputName="./imagenes/heatmap_caso2_" + algorithm_name,
+                displayOutput=False)
+
+    results['N Clusters']=n_clusters
+    results['HC metric']=met[0]
+    results['SC metric']=met[1]
+    results['Time']=timeAlg
+
+    outputData[algorithm_name] = results
+
+latexCaso1 = createLatexDataFrame(data=outputData)
+f = open('caso2.txt','w')
+f.write(latexCaso1.to_latex())
+f.close()
+
+print('\n{0:<15}\t{1:<10}\t{2:<10}\t{3:<10}\t{4:<10}'.format(
+    'Name', 'N clusters', 'HC metric', 'SC metric', 'Time (s)'))
+
+for name, res in outputData.items():
+    print('{0:<15}\t{1:<10}\t{2:<10.2f}\t{3:<10.2f}\t{4:<10.2f}'.format(
+        name, res['N Clusters'], res['HC metric'], res['SC metric'],
+        res['Time']))
+
+print('\nTotal time = {0:.2f}'.format(time.time() - t_global_start))
+
+#-----------------------------------------------------------------------------------------------------------------------
+# CASO DE USO 3
+#-----------------------------------------------------------------------------------------------------------------------
+t_global_start = time.time()
+print("Tercer caso de uso: accidentes en Bizkaia en los que llueve.")
+subset = accidentes[accidentes['PROVINCIA'] == 'Bizkaia']
+subset = accidentes[accidentes['FACTORES_ATMOSFERICOS'].str.contains('LLUVIA')]
+usadas = ['TOT_VICTIMAS', 'TOT_MUERTOS', 'TOT_HERIDOS_GRAVES', 'TOT_HERIDOS_LEVES', 'TOT_VEHICULOS_IMPLICADOS']
+X = subset[usadas]
+
+X_normal = preprocessing.normalize(X, norm='l2')
+
+k_means = KMeans(init='k-means++', n_clusters=4, n_init=5)
+aglo=AgglomerativeClustering(n_clusters=26,linkage="ward")
+bandwidth = estimate_bandwidth(X_normal, quantile=0.2, random_state=123456)
+meanshift = MeanShift(bandwidth=bandwidth,bin_seeding=True)
+birch=Birch(n_clusters=6,threshold=0.1)
+spectral=SpectralClustering(n_clusters=4,eigen_solver="arpack")
+
+clustering_algorithms = (
+    ("K-medias",k_means),
+    ("AC",aglo),
+    ("Mean Shift",meanshift),
+    ("Birch",birch),
+    ("SpectralC",spectral)
+)
+
+
+# Creamos los datos de salida, y mostramos las gráficas si queremos.
+outputData = dict()
+for algorithm_name,algorithm in clustering_algorithms:
+    results = dict()
+    met, clusterFrame, timeAlg,cluster_predict = createPrediction(dataframe=X, data=X_normal, model=algorithm)
+    n_clusters=len(set(cluster_predict))
+
+    if (n_clusters > 15):
+        X_filtrado = clusterFrame[clusterFrame.groupby('cluster').cluster.transform(len) > min_size]
+    else:
+        X_filtrado = clusterFrame
+
+    makeScatterPlot(data=clusterFrame, outputName="./imagenes/scatterMatrix_caso3_" + algorithm_name,
+                    displayOutput=False)
+
+    makeHeatmap(data=X_filtrado, outputName="./imagenes/heatmap_caso3_" + algorithm_name,
+                displayOutput=False)
+
+    if algorithm_name == 'AC' or algorithm_name == 'Birch':
+        X_filtrado_normal = preprocessing.normalize(X_filtrado,norm='l2')
+        linkage_array = ward(X_filtrado_normal)
+
+        dendrogram(linkage_array, orientation='left')
+        plt.show()
+        plt.clf()
+
+    results['N Clusters']=n_clusters
+    results['HC metric']=met[0]
+    results['SC metric']=met[1]
+    results['Time']=timeAlg
+
+    outputData[algorithm_name] = results
+
+latexCaso1 = createLatexDataFrame(data=outputData)
+f = open('caso3.txt','w')
+f.write(latexCaso1.to_latex())
+f.close()
+
+
+print('\n{0:<15}\t{1:<10}\t{2:<10}\t{3:<10}\t{4:<10}'.format(
+    'Name', 'N clusters', 'HC metric', 'SC metric', 'Time (s)'))
+
+for name, res in outputData.items():
+    print('{0:<15}\t{1:<10}\t{2:<10.2f}\t{3:<10.2f}\t{4:<10.2f}'.format(
+        name, res['N Clusters'], res['HC metric'], res['SC metric'],
+        res['Time']))
+
+print('\nTotal time = {0:.2f}'.format(time.time() - t_global_start))

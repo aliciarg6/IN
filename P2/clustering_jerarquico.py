@@ -78,9 +78,10 @@ from scipy.cluster import hierarchy
 linkage_array = hierarchy.ward(X_filtrado_normal)
 plt.figure(1)
 plt.clf()
-hierarchy.dendrogram(linkage_array,orientation='left') #lo pongo en horizontal para compararlo con el generado por seaborn
+hierarchy.dendrogram(linkage_array,orientation='top') #lo pongo en horizontal para compararlo con el generado por seaborn
 
 #Ahora lo saco usando seaborn (que a su vez usa scipy) para incluir un heatmap
 import seaborn as sns
 X_filtrado_normal_DF = pd.DataFrame(X_filtrado_normal,index=X_filtrado.index,columns=usadas)
-sns.clustermap(X_filtrado_normal_DF, method='ward', col_cluster=False, figsize=(20,10), cmap="YlGnBu", yticklabels=False)
+sns.clustermap(X_filtrado_normal_DF, method='ward', col_cluster=False, figsize=(20,10), cmap="YlGnBu")
+plt.show()

@@ -1,0 +1,11 @@
+\begin{tabular}{lrrrr}
+\toprule
+{} &  N Clusters &      HC metric &  SC metric &      Time \\
+\midrule
+K-medias   &           4 &   12653.140404 &   0.864330 &  0.015627 \\
+AC         &          45 &  257580.813779 &   0.969505 &  0.484442 \\
+Mean Shift &          45 &   70816.377136 &   0.955480 &  0.078159 \\
+Birch      &           6 &    1976.757706 &   0.586326 &  0.078110 \\
+SpectralC  &           4 &    7872.036606 &   0.843788 &  3.191561 \\
+\bottomrule
+\end{tabular}
