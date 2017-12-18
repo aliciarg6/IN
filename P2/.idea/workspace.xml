@@ -16,42 +16,7 @@
     <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="clustering.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/clustering.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="186" column="9" lean-forward="false" selection-start-line="186" selection-start-column="9" selection-end-line="186" selection-end-column="9" />
-              <folding>
-                <element signature="e#260#291#0" expanded="true" />
-                <element signature="e#732#1246#0" expanded="false" />
-                <element signature="e#1305#1941#0" expanded="false" />
-                <element signature="e#1991#2269#0" expanded="false" />
-                <element signature="e#2318#2468#0" expanded="false" />
-                <element signature="e#2518#2786#0" expanded="false" />
-                <element signature="e#2854#2950#0" expanded="false" />
-                <element signature="e#3024#3119#0" expanded="false" />
-                <element signature="e#3185#3868#0" expanded="false" />
-                <element signature="e#3906#4011#0" expanded="false" />
-                <element signature="e#4052#4282#0" expanded="false" />
-                <element signature="e#4320#4648#0" expanded="false" />
-                <element signature="e#4712#5053#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clustering_jerarquico.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/clustering_jerarquico.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="85" column="59" lean-forward="false" selection-start-line="85" selection-start-column="59" selection-end-line="85" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -71,6 +36,7 @@
       <find>sc_metric</find>
       <find>time</find>
       <find>caso2</find>
+      <find>sns</find>
     </findStrings>
     <replaceStrings>
       <replace>N Clusters</replace>
@@ -87,15 +53,16 @@
         <option value="$PROJECT_DIR$/modelosPredictivos.py" />
         <option value="$PROJECT_DIR$/ejemplo_data_science.py" />
         <option value="$PROJECT_DIR$/clustering_jerarquico.py" />
+        <option value="$PROJECT_DIR$/caso2.txt" />
         <option value="$PROJECT_DIR$/clustering.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="361" />
-    <option name="y" value="-4" />
-    <option name="width" value="1920" />
-    <option name="height" value="1084" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="43" />
+    <option name="y" value="37" />
+    <option name="width" value="1812" />
+    <option name="height" value="993" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -136,7 +103,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -148,10 +114,11 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -306,14 +273,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="43" y="37" width="1812" height="993" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13072917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13852097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928064" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.331307" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="960" y="24" width="960" height="1056" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33970752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="960" y="24" width="960" height="1056" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -358,7 +325,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="49" />
+      <option name="time" value="50" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -379,13 +346,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/clustering.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/practicas/lib/python3.5/site-packages/numpy/core/fromnumeric.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/practicas/lib/python3.5/site-packages/sklearn/cluster/affinity_propagation_.py" />
     <entry file="file://$PROJECT_DIR$/kmeans.png" />
@@ -425,121 +385,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/seaborn/rcmod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/dtypes/dtypes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/dtypes/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="653" column="0" lean-forward="false" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="824" column="0" lean-forward="false" selection-start-line="824" selection-start-column="0" selection-end-line="824" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/numeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="582" column="0" lean-forward="false" selection-start-line="582" selection-start-column="0" selection-end-line="582" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="1313" column="0" lean-forward="false" selection-start-line="1313" selection-start-column="0" selection-end-line="1313" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/lib/twodim_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="256" column="0" lean-forward="false" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/seaborn/axisgrid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="1324" column="0" lean-forward="false" selection-start-line="1324" selection-start-column="0" selection-end-line="1324" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/matplotlib/axes/_subplots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/matplotlib/projections/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/indexes/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="1596" column="0" lean-forward="false" selection-start-line="1596" selection-start-column="0" selection-end-line="1596" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/generic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="3611" column="0" lean-forward="false" selection-start-line="3611" selection-start-column="0" selection-end-line="3611" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/utils/validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="398" column="0" lean-forward="false" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/preprocessing/data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="1411" column="0" lean-forward="false" selection-start-line="1411" selection-start-column="0" selection-end-line="1411" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/seaborn/rcmod.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/dtypes/dtypes.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/dtypes/common.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/base.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/numeric.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/fromnumeric.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/lib/twodim_base.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/seaborn/axisgrid.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/matplotlib/axes/_subplots.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/matplotlib/projections/__init__.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/indexes/base.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/generic.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/utils/validation.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/preprocessing/data.py" />
     <entry file="file://$PROJECT_DIR$/K-medias.png" />
     <entry file="file://$PROJECT_DIR$/agglomerativeclustering_dendogram.png" />
     <entry file="file://$USER_HOME$/Downloads/IntelliJ IDEA Global Settings" />
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="6168" column="0" lean-forward="false" selection-start-line="6168" selection-start-column="0" selection-end-line="6168" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/codecs.py" />
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/frame.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -547,44 +411,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/internals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="4618" column="0" lean-forward="false" selection-start-line="4618" selection-start-column="0" selection-end-line="4618" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my_heatmap.svg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my_clustermap.svg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/caso2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/caso3.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/caso1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="37" lean-forward="true" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/internals.py" />
+    <entry file="file://$PROJECT_DIR$/my_heatmap.svg" />
     <entry file="file://$PROJECT_DIR$/imagenes/scatterMatrix_AC.png" />
     <entry file="file://$PROJECT_DIR$/imagenes/scatterMatrix_caso2_SpectralC.png">
       <provider selected="true" editor-type-id="images">
@@ -611,23 +439,47 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imagenes/heatmap_caso1_Mean Shift.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/imagenes/heatmap_caso1_Mean Shift.png" />
+    <entry file="file://$PROJECT_DIR$/submission.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clustering_jerarquico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="85" column="59" lean-forward="false" selection-start-line="85" selection-start-column="59" selection-end-line="85" selection-end-column="59" />
-          <folding />
+        <state relative-caret-position="918">
+          <caret line="57" column="17" lean-forward="false" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/caso1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my_clustermap.svg" />
+    <entry file="file://$PROJECT_DIR$/caso2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/caso3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clustering.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="186" column="9" lean-forward="false" selection-start-line="186" selection-start-column="9" selection-end-line="186" selection-end-column="9" />
+        <state relative-caret-position="18">
+          <caret line="182" column="0" lean-forward="false" selection-start-line="182" selection-start-column="0" selection-end-line="249" selection-end-column="68" />
           <folding>
             <element signature="e#260#291#0" expanded="true" />
             <element signature="e#732#1246#0" expanded="false" />
@@ -641,7 +493,6 @@
             <element signature="e#3906#4011#0" expanded="false" />
             <element signature="e#4052#4282#0" expanded="false" />
             <element signature="e#4320#4648#0" expanded="false" />
-            <element signature="e#4712#5053#0" expanded="false" />
           </folding>
         </state>
       </provider>
