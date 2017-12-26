@@ -11,6 +11,7 @@ from sklearn import ensemble, tree, linear_model
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.utils import shuffle
+import xgboost as xgb
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -112,6 +113,7 @@ features.drop(['TotalBsmtSF', '1stFlrSF', '2ndFlrSF'], axis=1, inplace=True)
 plt.figure(1)
 plt.clf()
 ax = sns.distplot(train_labels)
+plt.show()
 
 ## Log transformation of labels
 train_labels = np.log(train_labels)
@@ -120,12 +122,14 @@ train_labels = np.log(train_labels)
 plt.figure(2)
 plt.clf()
 ax = sns.distplot(train_labels)
+plt.show()
 
 ## Standardizing numeric features
 numeric_features = features.loc[:,['LotFrontage', 'LotArea', 'GrLivArea', 'TotalSF']]
 numeric_features_standardized = (numeric_features - numeric_features.mean())/numeric_features.std()
 
-#ax = sns.pairplot(numeric_features_standardized)
+ax = sns.pairplot(numeric_features_standardized)
+plt.show()
 
 # Getting Dummies from Condition1 and Condition2
 conditions = set([x for x in features['Condition1']] + [x for x in features['Condition2']])
@@ -192,9 +196,19 @@ train_test(GBest, x_train, x_test, y_train, y_test)
 scores = cross_val_score(GBest, train_features_st, train_labels, cv=5)
 print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
+'''
+XGBoost
+'''
+XgbTest = xgb.XGBRegressor(n_estimators=200)
+train_test(XgbTest,x_train,x_test,y_train,y_test)
+
+scores = cross_val_score(XgbTest,train_features,train_labels,cv=5)
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
 # Retraining models
 GB_model = GBest.fit(train_features, train_labels)
 ENST_model = ENSTest.fit(train_features_st, train_labels)
+Xgb_model = XgbTest.fit(train_features,train_labels)
 
 ## Getting our SalePrice estimation
 Final_labels = (np.exp(GB_model.predict(test_features)) + np.exp(ENST_model.predict(test_features_st))) / 2
