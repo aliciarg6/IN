@@ -161,7 +161,9 @@ def createLatexDataFrame(data):
 def makeHeatmap(data,displayOutput=True,outputName=None):
     meanDF, stdDF = createMeanClusterDF(dataFrame=data)
     meanDF = createNormalizedDF(dataFrame=meanDF)
-    hm = sns.heatmap(data=meanDF, linewidths=.1, cmap='Blues_r')
+    anotations = True
+    hm = sns.heatmap(data=meanDF, linewidths=.1, cmap='Blues_r', annot=anotations, xticklabels='auto')
+    plt.xticks(rotation=0)
 
     if displayOutput:
         plt.show()
@@ -182,15 +184,14 @@ t_global_start = time.time()
 print("Caso de uso: accidentes dónde hay colisón entre vehículos")
 
 subset = accidentes[accidentes['TIPO_ACCIDENTE'].str.contains("Colisión de vehículos")]
+subset = accidentes[~accidentes['ISLA'].str.contains("NO_ES_ISLA")]
 usadas = ['TOT_VICTIMAS', 'TOT_MUERTOS', 'TOT_HERIDOS_GRAVES', 'TOT_HERIDOS_LEVES', 'TOT_VEHICULOS_IMPLICADOS']
 X = subset[usadas]
-n = 20000
-
-X  = X.sample(n,random_state=123456)
+print(X.shape[0])
 X_normal = preprocessing.normalize(X, norm='l2')
 
 k_means = KMeans(init='k-means++', n_clusters=4, n_init=5)
-aglo=AgglomerativeClustering(n_clusters=23,linkage="ward")
+aglo=AgglomerativeClustering(n_clusters=38,linkage="ward")
 bandwidth = estimate_bandwidth(X_normal, quantile=0.2, random_state=123456)
 meanshift = MeanShift(bandwidth=bandwidth,bin_seeding=True)
 birch=Birch(n_clusters=6,threshold=0.1)
@@ -200,7 +201,7 @@ spectral=SpectralClustering(n_clusters=4,eigen_solver="arpack")
 clustering_algorithms = (
     ("K-medias",k_means),
     ("AC",aglo),
-    ("Mean Shift",meanshift),
+    ("MeanShift",meanshift),
     ("Birch",birch),
     ("SpectralC",spectral)
 )
@@ -257,22 +258,23 @@ subset = accidentes[accidentes['COMUNIDAD_AUTONOMA'].str.contains("Cataluña")]
 usadas = ['TOT_MUERTOS30D','TOT_HERIDOS_GRAVES30D','TOT_HERIDOS_LEVES30D', 'TOT_VEHICULOS_IMPLICADOS']
 
 X = subset[usadas]
-n = 10000
-
+n = 15000
+print(X.shape[0])
 X  = X.sample(n,random_state=123456)
 X_normal = preprocessing.normalize(X, norm='l2')
+min_size = 30
 
-k_means = KMeans(init='k-means++', n_clusters=4, n_init=5)
-aglo=AgglomerativeClustering(n_clusters=45,linkage="ward")
-bandwidth = estimate_bandwidth(X_normal, quantile=0.2, random_state=123456)
+k_means = KMeans(init='k-means++', n_clusters=6, n_init=5)
+aglo=AgglomerativeClustering(n_clusters=76,linkage="ward")
+bandwidth = estimate_bandwidth(X_normal, quantile=0.3, random_state=123456)
 meanshift = MeanShift(bandwidth=bandwidth,bin_seeding=True)
-birch=Birch(n_clusters=6,threshold=0.1)
-spectral=SpectralClustering(n_clusters=4,eigen_solver="arpack")
+birch=Birch(n_clusters=12,threshold=0.1)
+spectral=SpectralClustering(n_clusters=6,eigen_solver="arpack")
 
 clustering_algorithms = (
     ("K-medias",k_means),
     ("AC",aglo),
-    ("Mean Shift",meanshift),
+    ("MeanShift",meanshift),
     ("Birch",birch),
     ("SpectralC",spectral)
 )
@@ -327,20 +329,21 @@ subset = accidentes[accidentes['PROVINCIA'] == 'Bizkaia']
 subset = accidentes[accidentes['FACTORES_ATMOSFERICOS'].str.contains('LLUVIA')]
 usadas = ['TOT_VICTIMAS', 'TOT_MUERTOS', 'TOT_HERIDOS_GRAVES', 'TOT_HERIDOS_LEVES', 'TOT_VEHICULOS_IMPLICADOS']
 X = subset[usadas]
-
+print(X.shape[0])
 X_normal = preprocessing.normalize(X, norm='l2')
 
-k_means = KMeans(init='k-means++', n_clusters=4, n_init=5)
+min_size=5
+k_means = KMeans(init='k-means++', n_clusters=5, n_init=5)
 aglo=AgglomerativeClustering(n_clusters=26,linkage="ward")
-bandwidth = estimate_bandwidth(X_normal, quantile=0.2, random_state=123456)
+bandwidth = estimate_bandwidth(X_normal, quantile=0.4, random_state=123456)
 meanshift = MeanShift(bandwidth=bandwidth,bin_seeding=True)
-birch=Birch(n_clusters=6,threshold=0.1)
+birch=Birch(n_clusters=5,threshold=0.1)
 spectral=SpectralClustering(n_clusters=4,eigen_solver="arpack")
 
 clustering_algorithms = (
     ("K-medias",k_means),
     ("AC",aglo),
-    ("Mean Shift",meanshift),
+    ("MeanShift",meanshift),
     ("Birch",birch),
     ("SpectralC",spectral)
 )
@@ -364,13 +367,13 @@ for algorithm_name,algorithm in clustering_algorithms:
     makeHeatmap(data=X_filtrado, outputName="./imagenes/heatmap_caso3_" + algorithm_name,
                 displayOutput=False)
 
-    if algorithm_name == 'AC' or algorithm_name == 'Birch':
+    if algorithm_name == 'AC':
         X_filtrado_normal = preprocessing.normalize(X_filtrado,norm='l2')
         linkage_array = ward(X_filtrado_normal)
 
-        dendrogram(linkage_array, orientation='left')
+        dendrogram(linkage_array,leaf_rotation=90., leaf_font_size=5.)
         plt.show()
-        plt.clf()
+        #plt.clf()
 
     results['N Clusters']=n_clusters
     results['HC metric']=met[0]
