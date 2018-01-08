@@ -1,0 +1,24 @@
+\begin{tabular}{lllllll}
+\toprule
+{} &               Nombre &        Día &          Hora & Posición & Score Kaggle & RMSLE training \\
+\midrule
+0  &       submission\_one &   27/12/17 &      19:00:00 &    \textasciitilde1000 &      0.12539 &       0.092997 \\
+1  &         submission\_x &  27- 28/12 &  varias horas &    \textasciitilde1000 &    0.13-0.15 &    0.1 – 0.078 \\
+2  &   submission\_29\_12\_2 &   29/12/17 &      13:40:00 &    \textasciitilde1000 &      0.12566 &       0.092997 \\
+3  &   Submission\_29\_12 4 &   29/12/17 &      18:20:00 &    \textasciitilde1000 &      0.12576 &       0.078509 \\
+4  &   Submission\_30 12 1 &   30/12/17 &      11:30:00 &    \textasciitilde1000 &      0.13142 &       0.050387 \\
+5  &   Submission\_30 12 2 &   30/12/17 &      14:58:00 &     \textasciitilde650 &      0.12095 &       0.075196 \\
+6  &   Submission\_30 12 3 &   30/12/17 &      14:59:00 &     \textasciitilde600 &      0.12070 &       0.073795 \\
+7  &   Submission\_30\_12 4 &   30/12/17 &      14:59:00 &     \textasciitilde580 &      0.11963 &       0.086440 \\
+8  &  Submisision\_30\_12 5 &   30/12/17 &      15:00:00 &     \textasciitilde580 &      0.12039 &       0.075087 \\
+9  &   Submission\_30\_12 6 &   30/12/17 &      15:00:00 &     \textasciitilde580 &      0.12149 &       0.073679 \\
+10 &   Submission\_30\_12 7 &   30/12/17 &      15:00:00 &     \textasciitilde580 &      0.12127 &       0.086382 \\
+11 &   Submission\_30\_12 8 &   30/12/17 &      15:02:00 &     \textasciitilde580 &      0.12127 &       0.088779 \\
+12 &   Submission\_31\_12 1 &   31/12/17 &      14:05:00 &      550 &      0.11948 &       0.083367 \\
+13 &   Submission\_31\_12 2 &   31/12/17 &      14:09:00 &      550 &      0.11992 &       0.082508 \\
+14 &   Submission\_31\_12 3 &   31/12/17 &      14:15:00 &      550 &      0.11977 &       0.085418 \\
+15 &   Submission\_31\_12 4 &   31/12/17 &      11:23:00 &      550 &      0.12028 &       0.080700 \\
+16 &   Submission\_31\_12 5 &   31/12/17 &      15:28:00 &      550 &      0.11983 &       0.080339 \\
+17 &   Submission\_31\_12 6 &   31/12/17 &      15:38:00 &      550 &      0.11994 &       0.078922 \\
+\bottomrule
+\end{tabular}

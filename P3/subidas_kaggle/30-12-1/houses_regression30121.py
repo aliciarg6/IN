@@ -223,11 +223,12 @@ y_pred_lasso = model_lasso.predict(test_features_st)
 y_pred_enet = ENST_model.predict(test_features_st)
 
 ## Getting our SalePrice estimation
-Final_labels = (y_pred_lasso*0.9 + y_pred_xgb)/1.9
+Final_labels = y_pred_xgb
 Final_labels = np.exp(Final_labels)
 
-y_pred_train = ( Xgb_model.predict(train_features) + model_lasso.predict(train_features_st)*0.9 ) /1.9
+y_pred_train = Xgb_model.predict(train_features)
 get_score(y_pred_train,train_labels)
 
+
 ## Saving to CSV
-pd.DataFrame({'Id': test.Id, 'SalePrice': Final_labels}).to_csv('submission_29-12-4.csv', index =False)
+pd.DataFrame({'Id': test.Id, 'SalePrice': Final_labels}).to_csv('submission_30-12-1.csv', index =False)

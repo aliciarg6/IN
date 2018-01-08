@@ -1,0 +1,22 @@
+\begin{tabular}{lll}
+\toprule
+{} &               Nombre &              Algoritmos empleados. \\
+\midrule
+0  &   submission\_29\_12\_2 &  Gradient Boosting y ElasticNetCV. \\
+1  &   Submission\_29\_12 4 &                  XGBoost y LassoCV \\
+2  &   Submission\_30 12 1 &                           XGBoost. \\
+3  &   Submission\_30 12 2 &                  XGBoost y LassoCV \\
+4  &   Submission\_30 12 3 &                  XGBoost y LassoCV \\
+5  &   Submission\_30\_12 4 &                  XGBoost y LassoCV \\
+6  &  Submisision\_30\_12 5 &                  XGBoost y LassoCV \\
+7  &   Submission\_30\_12 6 &                  XGBoost y LassoCV \\
+8  &   Submission\_30\_12 7 &                  XGBoost y LassoCV \\
+9  &   Submission\_30\_12 8 &                    XGBoost y Lasso \\
+10 &   Submission\_31\_12 1 &                  XGBoost y LassoCV \\
+11 &   Submission\_31\_12 2 &                  XGBoost y LassoCV \\
+12 &   Submission\_31\_12 3 &                  XGBoost y LassoCV \\
+13 &   Submission\_31\_12 4 &  XGBoost , LassoCV y ElasticNetCV. \\
+14 &   Submission\_31\_12 5 &  XGBoost , LassoCV y ElasticNetCV. \\
+15 &   Submission\_31\_12 6 &  XGBoost , LassoCV y ElasticNetCV. \\
+\bottomrule
+\end{tabular}
